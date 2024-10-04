@@ -9,7 +9,6 @@ const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
 
 const pathFile = path.join(_dirname, 'files', 'fresh.txt');
-const content = 'I am fresh and young';
 
 const checkFile = async (file) => {
   try {
@@ -20,15 +19,16 @@ const checkFile = async (file) => {
   }
 };
 
-const create = async () => {
-  const isFileExists = await checkFile(pathFile);
+const create = async (file) => {
+  const content = 'I am fresh and young';
+  const isFileExists = await checkFile(file);
 
   if (isFileExists) {
-    throw new Error('*** FS operation failed. File already exists: ' + pathFile);
+    throw new Error('*** FS operation failed. File already exists: ' + file);
   }
 
-  await fs.writeFile(pathFile, content);
-  console.log(`*** File created: ${pathFile}`);
+  await fs.writeFile(file, content);
+  console.log(`*** File created: ${file}`);
 };
 
-create().catch((err) => console.error(err.message));
+create(pathFile).catch((err) => console.error(err.message));
