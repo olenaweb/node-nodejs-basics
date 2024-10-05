@@ -3,12 +3,12 @@
 //  (if file already exists Error with message FS operation failed must be thrown)
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import { dirname, join } from 'path';
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
 
-const pathFile = path.join(_dirname, 'files', 'fresh.txt');
+const pathFile = join(_dirname, 'files', 'fresh.txt');
 
 const checkFile = async (file) => {
   try {
