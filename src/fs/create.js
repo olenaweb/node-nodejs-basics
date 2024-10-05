@@ -8,7 +8,6 @@ import { dirname, join } from 'path';
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
 
-const pathFile = join(_dirname, 'files', 'fresh.txt');
 
 const checkFile = async (file) => {
   try {
@@ -19,7 +18,7 @@ const checkFile = async (file) => {
   }
 };
 
-const create = async (file) => {
+const createFile = async (file) => {
   const content = 'I am fresh and young';
   const isFileExists = await checkFile(file);
 
@@ -31,4 +30,9 @@ const create = async (file) => {
   console.log(`*** File created: ${file}`);
 };
 
-create(pathFile).catch((err) => console.error(err.message));
+const create = async () => {
+  const pathFile = join(_dirname, 'files', 'fresh.txt');
+  await createFile(pathFile).catch((err) => console.error(err.message));
+}
+
+await create();
