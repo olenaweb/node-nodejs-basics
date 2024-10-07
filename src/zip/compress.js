@@ -1,9 +1,10 @@
 import { access } from 'node:fs/promises';
-import { createReadStream, createWriteStream } from 'fs';
+import { createReadStream, createWriteStream } from 'node:fs';
 import { createGzip } from 'node:zlib';
+import { pipeline } from 'node:stream';
 
-import { dirname, join, basename } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname, join, basename } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,22 +17,35 @@ const checkFile = async (file) => {
     return false;
   }
 };
-const compressFiles = async (archFile, zipFile) => {
-  let isFileExists = await checkFile(archFile);
+const compressFiles = async (file, zipFile) => {
+  let isFileExists = await checkFile(file);
   if (!isFileExists) {
-    throw new Error(`*** Compress operation failed. Not a such file : ${archFile}`);
+    throw new Error(`*** Compress operation failed. Not a such file : ${file}`);
   }
-  const read = createReadStream(archFile);
+  const read = createReadStream(file);
   const gzip = createGzip();
   const write = createWriteStream(zipFile);
-  read.pipe(gzip).pipe(write);
-  console.log(`*** File ${basename(archFile)} has been compressed to ${basename(zipFile)}`);
+
+  pipeline(read, gzip, write, (err) => {
+    if (err) {
+      process.exitCode = 1;
+      throw new Error(`*** Compress operation failed. Err: ${err}`);
+    }
+  });
+
+  // try {
+  //   read.pipe(gzip).pipe(write);
+  // }
+  // catch (err) {
+  //   throw new Error(`*** Compress operation failed. Err: ${err}`);
+  // }
+  console.log(`*** File ${basename(file)} has been compressed to ${basename(zipFile)}`);
 }
 
 const compress = async () => {
-  const archFile = join(__dirname, 'files', 'fileToCompress.txt');
+  const file = join(__dirname, 'files', 'fileToCompress.txt');
   const zipFile = join(__dirname, 'files', 'archive.gz');
-  await compressFiles(archFile, zipFile).catch((err) => console.error(err.message));
+  await compressFiles(file, zipFile).catch((err) => console.error(err.message));
 };
 
 await compress();
