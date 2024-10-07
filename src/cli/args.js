@@ -5,13 +5,13 @@
 // node src/cli/args.js --some-arg value1 --other 1337 --arg2 42
 
 const parseArgs = () => {
-  let str = '';
-  process.argv.forEach((val, i) => {
+  let line = '';
+  process.argv.forEach((arg, i) => {
     if (i % 2 === 0 && i > 1) {
-      str = val.slice(2);
+      line = arg.slice(2);
     } else if (i % 2 !== 0 && i > 1) {
-      console.log(str + ' is ' + val);
-      str = '';
+      console.log(line + ' is ' + arg);
+      line = '';
     }
   });
 };

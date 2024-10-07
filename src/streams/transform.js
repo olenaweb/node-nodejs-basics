@@ -3,7 +3,7 @@
 import { Transform } from 'stream';
 
 const transform = async () => {
-  process.stdout.write('Enter your information below. To complete the entry, enter : Ctrl-C.\n ');
+  process.stdout.write('Enter your information below and press <Enter>. To complete the entry, enter : Ctrl-C.\n ');
   const reverseStream = new Transform({
     transform(chunk, encoding, callback) {
       const reversedChunk = chunk.toString().split('').reverse().join('');

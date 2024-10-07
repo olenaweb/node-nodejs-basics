@@ -3,7 +3,7 @@
 //  (if file already exists Error with message FS operation failed must be thrown)
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname, join, basename } from 'path';
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
@@ -27,7 +27,7 @@ const createFile = async (file) => {
   }
 
   await fs.writeFile(file, content);
-  console.log(`*** File created: ${file}`);
+  console.log(`*** File created: ${basename(file)}`);
 };
 
 const create = async () => {

@@ -5,9 +5,11 @@
 const parseEnv = () => {
   const envs = process.env;
   console.log('*** Environment variables with prefix RSS_ ');
-  for (const name in envs) {
-    const namePart = name.split('_');
-    if (namePart[0] === 'RSS') { console.log(`${name} =  ${envs[name]};`); }
+  for (const item in envs) {
+    const itemPart = item.split('_');
+    if (itemPart[0] === 'RSS') {
+      console.log(`${item} =  ${envs[item]};`);
+    }
   }
 };
 
