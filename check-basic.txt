@@ -1,0 +1,17 @@
+npm run cli:args                     node src/cli/args.js --some-arg value1 --other 1337 --arg2 42
+npm run cli:env                      npx cross-env SOME=any RSS_foo=bar RSS_bar=baz node src/cli/env.js
+npm run cp                           node src/cp/cp.js
+npm run fs:copy                      node src/fs/copy.js
+npm run fs:create                    node src/fs/create.js
+npm run fs:delete                    node src/fs/delete.js
+npm run fs:list                      node src/fs/list.js
+npm run fs:read                      node src/fs/read.js
+npm run fs:rename                    node src/fs/rename.js
+npm run hash                         node src/hash/calcHash.js
+npm run modules                      node src/modules/esm.mjs
+npm run streams:read                 node src/streams/read.js
+npm run streams:transform            node src/streams/transform.js
+npm run streams:write                node src/streams/write.js
+npm run wt                           node src/wt/main.js
+npm run zip:compress                 node src/zip/compress.js
+npm run zip:decompress               node src/zip/decompress.js
