@@ -17,7 +17,6 @@ const performCalculations = async () => {
     const worker = new Worker(workerScript, { workerData: i + 10 });
 
     worker.on('message', (result) => {
-      // results are stored at the correct index
       results[i] = { status: 'resolved', data: result };
 
       if (results.filter(Boolean).length === countCPU) {
