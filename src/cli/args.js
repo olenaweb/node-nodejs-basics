@@ -5,9 +5,17 @@ const parseArgs = () => {
     const argName = args[i];
     const argValue = args[i + 1];
 
-    if (argName && argName.startsWith('--') && argValue !== undefined) {
+    if (argName && argName.startsWith('--')) {
       const cleanArgName = argName.slice(2);
-      console.log(`${cleanArgName} is ${argValue}`);
+
+      if (argValue !== undefined && !argValue.startsWith('--')) {
+        console.log(`${cleanArgName} is ${argValue}`);
+      } else {
+        console.log(`${cleanArgName} is (no value provided)`);
+        if (argValue && argValue.startsWith('--')) {
+          i -= 1;
+        }
+      }
     }
   }
 };

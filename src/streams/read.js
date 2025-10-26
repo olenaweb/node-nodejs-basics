@@ -1,6 +1,6 @@
 import { createReadStream } from 'node:fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { access } from 'node:fs/promises';
 
 const checkFile = async (file) => {
@@ -28,7 +28,7 @@ const readText = async (file) => {
 
   stream.on('end', () => {
     stdout.write('*** Content of file\n');
-    stdout.write(data + "\n" || 'No content to display' + "\n");
+    stdout.write((data || 'No content to display') + "\n");
     stdout.write('*** End\n');
   });
 
