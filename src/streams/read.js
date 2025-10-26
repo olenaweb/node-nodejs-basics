@@ -30,7 +30,6 @@ const readText = async (file) => {
     stdout.write('*** Content of file\n');
     stdout.write(data + "\n" || 'No content to display' + "\n");
     stdout.write('*** End\n');
-    stdout.end();
   });
 
   stream.on('error', (error) => {

@@ -33,6 +33,6 @@ const createFile = async (file) => {
 const create = async () => {
   const pathFile = join(_dirname, 'files', 'fresh.txt');
   await createFile(pathFile).catch((err) => console.error(err.message));
-}
+};
 
 await create();

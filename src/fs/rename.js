@@ -39,7 +39,8 @@ const rename = async () => {
   const oldfile = join(_dirname, 'files', 'wrongFilename.txt');
   const newfile = join(_dirname, 'files', 'properFilename.md');
   await renameFiles(oldfile, newfile).catch((err) => console.error(err.message));
-}
+};
+
 await rename();
 
 

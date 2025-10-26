@@ -1,8 +1,7 @@
 import { fork } from 'node:child_process';
 import { access } from 'node:fs/promises';
-
-import { dirname, join, basename } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,7 +25,7 @@ const spawnChildProcessFile = async (file, args) => {
     file,
     args,
     {
-      stdio: ['pipe', 'pipe', 'inherit', 'ipc',]
+      stdio: ['pipe', 'pipe', 'inherit', 'ipc']
     }
   );
   process.stdin.pipe(childProcess.stdin);
@@ -35,8 +34,7 @@ const spawnChildProcessFile = async (file, args) => {
 
 const spawnChildProcess = async (arg) => {
   const file = join(__dirname, 'files', 'script.js');
-  spawnChildProcessFile(file, arg).catch((err) => console.error(err.message));
-
-}
+  await spawnChildProcessFile(file, arg).catch((err) => console.error(err.message));
+};
 
 spawnChildProcess(['someArgument1', 'someArgument2']);

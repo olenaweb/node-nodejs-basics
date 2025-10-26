@@ -22,18 +22,23 @@ const compressFiles = async (file, zipFile) => {
   if (!isFileExists) {
     throw new Error(`*** Compress operation failed. Not a such file : ${file}`);
   }
-  const read = createReadStream(file);
-  const gzip = createGzip();
-  const write = createWriteStream(zipFile);
 
-  pipeline(read, gzip, write, (err) => {
-    if (err) {
-      process.exitCode = 1;
-      throw new Error(`*** Compress operation failed. Err: ${err}`);
-    }
+  return new Promise((resolve, reject) => {
+    const read = createReadStream(file);
+    const gzip = createGzip();
+    const write = createWriteStream(zipFile);
+
+    pipeline(read, gzip, write, (err) => {
+      if (err) {
+        process.exitCode = 1;
+        reject(new Error(`*** Compress operation failed. Err: ${err}`));
+      } else {
+        console.log(`*** File ${basename(file)} has been compressed to ${basename(zipFile)}`);
+        resolve();
+      }
+    });
   });
-  console.log(`*** File ${basename(file)} has been compressed to ${basename(zipFile)}`);
-}
+};
 
 const compress = async () => {
   const file = join(__dirname, 'files', 'fileToCompress.txt');

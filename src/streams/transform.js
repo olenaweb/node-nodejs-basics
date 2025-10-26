@@ -1,6 +1,6 @@
 // transform.js - implement function that reads data from process.stdin,
 //  reverses text using Transform Stream and then writes it into process.stdout
-import { Transform } from 'stream';
+import { Transform } from 'node:stream';
 
 const transform = async () => {
   process.stdout.write('Enter your information below and press <Enter>. To complete the entry, enter : Ctrl-C.\n ');

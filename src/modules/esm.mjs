@@ -1,13 +1,12 @@
-import path from 'path';
-import { release, version } from 'os';
+import path from 'node:path';
+import { release, version } from 'node:os';
 import { createServer as createServerHttp } from 'node:http';
 import './files/c.js';
-
 import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+const require = createRequire(import.meta.url);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

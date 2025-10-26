@@ -31,7 +31,7 @@ const copyDirectory = async (sourceDir, targetDir) => {
 
       // If the element is a directory, recursively copy its contents
       if (file.isDirectory()) {
-        await mkdir(targetPath);
+        await mkdir(targetPath, { recursive: true });
         await copyAllFiles(sourcePath, targetPath);
         // Copying files
       } else if (file.isFile()) {

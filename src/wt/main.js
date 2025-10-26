@@ -1,8 +1,8 @@
 import { join } from 'node:path';
-import os from 'os';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { Worker } from 'worker_threads';
+import os from 'node:os';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+import { Worker } from 'node:worker_threads';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

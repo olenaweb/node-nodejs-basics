@@ -1,13 +1,15 @@
 const parseArgs = () => {
-  let line = '';
-  process.argv.forEach((arg, i) => {
-    if (i % 2 === 0 && i > 1) {
-      line = arg.slice(2);
-    } else if (i % 2 !== 0 && i > 1) {
-      console.log(line + ' is ' + arg);
-      line = '';
+  const args = process.argv.slice(2);
+
+  for (let i = 0; i < args.length; i += 2) {
+    const argName = args[i];
+    const argValue = args[i + 1];
+
+    if (argName && argName.startsWith('--') && argValue !== undefined) {
+      const cleanArgName = argName.slice(2);
+      console.log(`${cleanArgName} is ${argValue}`);
     }
-  });
+  }
 };
 
 parseArgs();
