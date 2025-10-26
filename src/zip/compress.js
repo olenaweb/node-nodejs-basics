@@ -32,13 +32,6 @@ const compressFiles = async (file, zipFile) => {
       throw new Error(`*** Compress operation failed. Err: ${err}`);
     }
   });
-
-  // try {
-  //   read.pipe(gzip).pipe(write);
-  // }
-  // catch (err) {
-  //   throw new Error(`*** Compress operation failed. Err: ${err}`);
-  // }
   console.log(`*** File ${basename(file)} has been compressed to ${basename(zipFile)}`);
 }
 
